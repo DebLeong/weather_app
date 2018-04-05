@@ -2,7 +2,10 @@
 A weather application built with react native
 ## Demo
 ![Demo Cover](./demo/screenshot_cover.png)
-
+![Demo Cover](./demo/screenshot_clear.png)
+![Demo Cover](./demo/screenshot_cloud.png)
+![Demo Cover](./demo/screenshot_thunder.png)
+![Demo Cover](./demo/screenshot_rain.png)
 ## Instructions
 1. Git clone repository
 1. `cd weather_app`
