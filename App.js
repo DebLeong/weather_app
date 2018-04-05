@@ -8,12 +8,16 @@ export default class App extends Component {
     state = {
         isLoaded: false,
         error: null,
+        temp: null,
+        name: null,
+        uvi: null,
     };
 
     componentDidMount(){
         navigator.geolocation.getCurrentPosition(
             position => {
                 this._getWeather(position.coords.latitude, position.coords.longitude);
+                this._getUVI(position.coords.latitude, position.coords.longitude);
             },
             error => {
                 this.setState({
@@ -27,18 +31,37 @@ export default class App extends Component {
         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
         .then(response => response.json())
         .then(json => {
-            console.log(json)
+            this.setState({
+                temp: json.main.temp,
+                name: json.weather[0].main,
+                isLoaded: true,
+            })
         });
     };
 
+    _getUVI = (lat, lon) => {
+        fetch(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
+        .then(response => response.json())
+        .then(json => {
+            this.setState({
+                uvi: json.value,
+            })
+        });
+    };
 
     render() {
-        const { isLoaded, error } = this.state;
+        const { isLoaded, error, temp, name, uvi } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
-                {isLoaded ? <Weather /> : 
-                    (<View style={styles.loading}>
+                {isLoaded ? (
+                    <Weather 
+                        temp={Math.ceil(temp - 273.15)}
+                        name={name}
+                        uvi={Math.ceil(uvi)}
+                    />
+                ) : (
+                    <View style={styles.loading}>
                         <Text style={styles.loadingText}>Getting the lovely weather</Text>
                         {error ? <Text style={styles.errorText}>{error}</Text> : null}
                     </View>
