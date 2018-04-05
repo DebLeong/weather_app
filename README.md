@@ -2,6 +2,7 @@
 A weather application built with react native
 ## Demo
 ![Demo Cover](./demo/screenshot_cover.png =250x)
+<img src="'./demo/screenshot_cover.png" width="48">
 ![Demo Cover](./demo/screenshot_clear.png)
 ![Demo Cover](./demo/screenshot_cloud.png)
 ![Demo Cover](./demo/screenshot_thunder.png)
