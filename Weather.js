@@ -69,7 +69,7 @@ async function phoneCall() {
     }
 };
 
-function Weather({ temp, name, uvi, title, subtitle }){
+function Weather({ temp, name, uvi, title, subtitle, city }){
     const weatherCase = weatherCases[name];
     return (
             <LinearGradient
@@ -77,6 +77,7 @@ function Weather({ temp, name, uvi, title, subtitle }){
                 style={styles.container}
             >
                 <View style={styles.upper}>
+                    <Text style={styles.city}>{city}</Text>
                     <Ionicons color='white' size={130} name={weatherCase.icon} />
                 </View>
                 <View style={styles.middle}>
@@ -117,7 +118,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
         backgroundColor: 'transparent',
-        paddingTop: 60,
+        paddingTop: 100,
+    },
+    city: {
+        fontSize: 48,
+        backgroundColor: 'transparent',
+        color: 'white',
     },
     middle: {
         flex: 1,
