@@ -1,7 +1,7 @@
 # Welcome to Lovely Weather App
 A weather application built with react native
 ## Demo
-![Demo Cover](../demo/screenshot_cover.png)
+![Demo Cover](./demo/screenshot_cover.png)
 
 ## Instructions
 1. Git clone repository
