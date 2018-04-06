@@ -1,5 +1,5 @@
 # Welcome to Lovely Weather App
-A weather application built with react native
+A Weather Application built with React Native
 ## Demo
 <img src="./demo/screenshot_clear.png" width="200">     <img src="./demo/screenshot_rain.png" width="200">     <img src="./demo/screenshot_cloud.png" width="200">     <img src="./demo/screenshot_thunder.png" width="200">
 ## Instructions

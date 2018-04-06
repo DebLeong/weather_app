@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import Weather from './Weather';
 
 const API_KEY = '796b83219afe05abdccc5d9fe2007653'; 
-            
+
 export default class App extends Component {
     state = {
         isLoaded: false,
@@ -12,6 +12,7 @@ export default class App extends Component {
         name: null,
         uvi: null,
         city: null,
+        wind: null,
     };
 
     componentDidMount(){
@@ -32,27 +33,35 @@ export default class App extends Component {
         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
         .then(response => response.json())
         .then(json => {
+            console.log(json);
             this.setState({
                 temp: json.main.temp,
                 name: json.weather[0].main,
                 city: json.name,
+                wind: json.wind.speed,
                 isLoaded: true,
             })
         });
     };
 
     _getUVI = (lat, lon) => {
-        fetch(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
+        fetch(
+            `http://api.openuv.io/api/v1/uv?lat=${lat}&lng=${lon}`,
+            {
+                headers: {
+                    "x-access-token": "eb19320696318cf1247db18cc2e9387f"
+                },
+            })
         .then(response => response.json())
         .then(json => {
             this.setState({
-                uvi: json.value,
+                uvi: json.result.uv_max,
             })
         });
     };
 
     render() {
-        const { isLoaded, error, temp, name, uvi, city } = this.state;
+        const { isLoaded, error, temp, name, uvi, city, wind } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
@@ -62,6 +71,7 @@ export default class App extends Component {
                         name={name}
                         uvi={Math.ceil(uvi)}
                         city={city}
+                        wind={wind}
                     />
                 ) : (
                     <View style={styles.loading}>
