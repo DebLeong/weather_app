@@ -31,7 +31,7 @@ export default class App extends Component {
     }
     
     _getWeather = (lat, lon) => {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${22.2}&lon=${lon}&APPID=${API_KEY}`)
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
         .then(response => response.json())
         .then(json => {
             this.setState({
