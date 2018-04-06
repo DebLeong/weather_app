@@ -6,7 +6,8 @@ const API_KEY = '796b83219afe05abdccc5d9fe2007653';
 
 export default class App extends Component {
     state = {
-        isLoaded: false,
+        tempLoaded: false,
+        uvLoaded: false,
         error: null,
         temp: null,
         name: null,
@@ -30,16 +31,15 @@ export default class App extends Component {
     }
     
     _getWeather = (lat, lon) => {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`)
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${22.2}&lon=${lon}&APPID=${API_KEY}`)
         .then(response => response.json())
         .then(json => {
-            console.log(json);
             this.setState({
                 temp: json.main.temp,
                 name: json.weather[0].main,
                 city: json.name,
                 wind: json.wind.speed,
-                isLoaded: true,
+                tempLoaded: true,
             })
         });
     };
@@ -54,22 +54,24 @@ export default class App extends Component {
             })
         .then(response => response.json())
         .then(json => {
+            console.log(json.result.uv_max);
             this.setState({
                 uvi: json.result.uv_max,
+                uvLoaded: true,
             })
         });
     };
 
     render() {
-        const { isLoaded, error, temp, name, uvi, city, wind } = this.state;
+        const { tempLoaded, uvLoaded, error, temp, name, uvi, city, wind } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
-                {isLoaded ? (
+                {(tempLoaded  && uvLoaded) ? (
                     <Weather 
                         temp={Math.ceil(temp - 273.15)}
                         name={name}
-                        uvi={Math.ceil(uvi)}
+                        uvi={uvi.toFixed(1)}
                         city={city}
                         wind={wind}
                     />

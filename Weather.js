@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import call from 'react-native-phone-call';
 
@@ -80,14 +80,23 @@ function Weather({ temp, name, uvi, title, subtitle, city, wind }){
                     <Text style={styles.city}>{city}</Text>
                     <Ionicons color='white' size={130} name={weatherCase.icon} />
                 </View>
-                <View style={styles.upper_middle}>
-                    <Text style={styles.temp}>{temp}º</Text>
-                    <Text style={styles.temp}>UV{uvi}</Text>
+                
+                <View style={styles.middle}>
+                    <View style={styles.upper_middle}>
+                        <Text style={styles.temp}>{temp}º</Text>
+                        
+                        <Text style={styles.temp}>
+                            <FontAwesome color='white' size={30} name={'sun-o'} />
+                             {uvi}
+                        </Text>
+                    </View>
+
+                    <View style={styles.lower_middle}>
+                        <MaterialCommunityIcons color='white' size={40} name={'weather-windy'} />
+                        <Text style={styles.temp}>{wind}</Text>
+                    </View>
                 </View>
-                <View style={styles.lower_middle}>
-                    <MaterialCommunityIcons color='white' size={40} name={'weather-windy'} />
-                    <Text style={styles.temp}>{wind}</Text>
-                </View>
+
                 <View style={styles.lower}>
                     <Text style={styles.title}>{weatherCase.title}</Text>
                     <Text style={styles.subtitle}>{weatherCase.subtitle[(Math.floor(Math.random() * weatherCase.subtitle.length))]}</Text>
@@ -101,16 +110,17 @@ function Weather({ temp, name, uvi, title, subtitle, city, wind }){
                         </View>
                     </TouchableOpacity>
                 </View>
+
             </LinearGradient>
     );
 }
 
 Weather.propTypes = {
     temp: PropTypes.number.isRequired,
-    uvi: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     wind: PropTypes.number.isRequired,
+    uvi: PropTypes.string.isRequired,
 };
 
 export default Weather;
@@ -127,12 +137,17 @@ const styles = StyleSheet.create({
         paddingTop: 100,
     },
     city: {
-        fontSize: 24,
+        fontSize: 36,
+        fontWeight: "300",
+        textAlign: 'center',
         backgroundColor: 'transparent',
         color: 'white',
     },
+    middle: {
+       flex: 1, 
+        marginBottom: 100,
+    },
     upper_middle: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 20,
@@ -140,13 +155,11 @@ const styles = StyleSheet.create({
         paddingRight: 80,
     },
     lower_middle: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
         paddingTop: 0,
         paddingLeft: 120,
         paddingRight: 120,
-        marginBottom: 100,
     },
     temp: {
         fontSize: 40,
