@@ -54,9 +54,8 @@ export default class App extends Component {
             })
         .then(response => response.json())
         .then(json => {
-            console.log(json.result.uv_max);
             this.setState({
-                uvi: json.result.uv_max,
+                uvi: json.result.uv,
                 uvLoaded: true,
             })
         });
