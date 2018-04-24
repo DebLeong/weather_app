@@ -16,7 +16,7 @@ const weatherCases = {
             '不管晴天雨天，都希望你能好好的照顧自己，學會給自己放鬆，別匆忙。',
             '現在是下午18:30分，雨下了一天，我坐在工作室靠窗的位置，吃了三顆綜合樓水果店買的橘子，用心的想今天的內容想了7500秒，可是還是沒有想出什麼。你知不知道雨一直下，也許再過五分之一秒，我，還是想不出。',
         ],
-        icon: 'ios-rainy',
+        icon: 'weather-pouring',
     },
     Clear: {
         colors: ['#FEF253', '#FF7300'],
@@ -28,7 +28,7 @@ const weatherCases = {
             '人世間所有的相遇，都是久别重逢。寧可一思進，莫在一思停。',
             '做羹要講究火候，火候不到，難以下咽，火候過了，事情就焦。',
         ],
-        icon: 'ios-sunny',
+        icon: 'weather-sunny',
     },
     Thunderstorm: {
         colors: ['#00ECBC', '#007ADF'],
@@ -39,7 +39,7 @@ const weatherCases = {
             '念念不忘，必有回響。點一盞燈，有燈必有人。',
             '有時候，耳朵比眼睛還重要，很多東西用耳朵聽比用眼睛看好，一個人假裝開心，但聲音就裝不了。細心一聽就知道了。',
         ],
-        icon: 'ios-thunderstorm',
+        icon: 'weather-lightning',
     },
     Clouds: {
         colors: ['#D7D2CC','#304352'],
@@ -52,7 +52,20 @@ const weatherCases = {
             '從她身上我明白一個道理，只要你自己不放棄，你永遠都有機會。',
             '或去或留，我選擇了留在我的年月，那是我最開心的日子。',
         ],
-        icon: 'ios-cloudy',
+        icon: 'weather-cloudy',
+    },
+    Mist: {
+        colors: ['#D7D2CC','#304352'],
+        title: '薄霧',
+        subtitle: [
+            '所有的記憶都是潮濕的。',
+            '我就是不要你優雅地擦，我要聞到你的味道、感覺到你的氣溫。',
+            '美學是瓶子，故事是內容，二者是不能分開的。拍電影的目的不應該是拍一個東西讓它很美，這不會是美的，只有對的東西才會美，必須有故事作為載體。',
+            '不如我們從頭來過。',
+            '人生若無悔，那該多無趣啊。。',
+            '在愛情故事裡，大家最敏感也最在乎的事情就是你會不會變？我們對愛人的承諾，不也一再保證著自己絕對不變，但是你真的不會變嗎？',
+        ],
+        icon: 'weather-fog',
     },
 };
 
@@ -70,7 +83,8 @@ async function phoneCall() {
 };
 
 function Weather({ temp, name, uvi, title, subtitle, city, wind }){
-    const weatherCase = weatherCases['Thunderstorm'];
+    //const weatherCase = weatherCases[name];
+    const weatherCase = weatherCases['Mist'];
     return (
             <LinearGradient
                 colors={weatherCase.colors}
@@ -78,7 +92,7 @@ function Weather({ temp, name, uvi, title, subtitle, city, wind }){
             >
                 <View style={styles.upper}>
                     <Text style={styles.city}>{city}</Text>
-                    <Ionicons color='white' size={130} name={weatherCase.icon} />
+                    <MaterialCommunityIcons color='white' size={130} name={weatherCase.icon} />
                 </View>
                 
                 <View style={styles.middle}>
@@ -187,7 +201,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     call: {
-        marginBottom: 90,
+        marginBottom: 60,
         flexDirection: 'row',
     },
     callText: {
