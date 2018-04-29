@@ -83,8 +83,7 @@ async function phoneCall() {
 };
 
 function Weather({ temp, name, uvi, title, subtitle, city, wind }){
-    //const weatherCase = weatherCases[name];
-    const weatherCase = weatherCases['Mist'];
+    const weatherCase = weatherCases[name];
     return (
             <LinearGradient
                 colors={weatherCase.colors}
